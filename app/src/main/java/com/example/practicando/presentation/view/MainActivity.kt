@@ -19,42 +19,35 @@ import com.example.practicando.presentation.viewmodel.PokemonsViewmodelFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: PokemonsViewModel
-    private lateinit var adapterPokemonList: PokemonListAdapter
+    private lateinit var apiService: PokemonService
+    private lateinit var repository: PokemonRepositoryImplementation
+    private lateinit var useCase: PokemonsUseCase
+    private lateinit var viewModelFactory : PokemonsViewmodelFactory
+    private lateinit var mainViewModel : PokemonsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupViewModel()
-        setupRecyclerView()
+//        apiService = RetrofitHelper.getRetrofit()
+//            .create(PokemonService::class.java)
+//        repository = PokemonRepositoryImplementation(apiService)
+//        useCase = PokemonsUseCase(repository)
+//        viewModelFactory = PokemonsViewmodelFactory(useCase)
+//        mainViewModel = ViewModelProvider(this, viewModelFactory)[PokemonsViewModel::class.java]
 
-        cargarFragmentList()
-        cargarFragmentDetail()
-
-    }
-
-    private fun setupViewModel() {
-        val apiService = RetrofitHelper.getRetrofit()
-            .create(PokemonService::class.java)
-        val repository = PokemonRepositoryImplementation(apiService)
-        val useCase = PokemonsUseCase(repository)
-        val viewmodelFactory = PokemonsViewmodelFactory(useCase)
-        val viewModel = ViewModelProvider(this, viewmodelFactory)
-            .get(PokemonsViewModel::class.java)
-    }
-
-    private fun setupRecyclerView() {
-        adapterPokemonList = PokemonListAdapter()
-//        binding.recyclerView.adapter = adapterPokemonList
+//        if (savedInstanceState == null) {
+//            cargarFragmentList()
+//        }
+//        cargarFragmentDetail()
     }
 
     private fun cargarFragmentList() {
         val fragmentList = PokemonListFragment()
+//        val fragmentList = PokemonListFragment(mainViewModel.pokemonLV)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.FL_List, fragmentList)
+            .replace(R.id.FCV_main, fragmentList) // Ensure the ID matches your layout
             .commit()
     }
 

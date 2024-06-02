@@ -1,29 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".presentation.view.PokemonDetails"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.PokemonDetailFragment">
 
-    <TextView
-        android:id="@+id/TV_PokemonName"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="NAME">
-    </TextView>
-    <TextView
-        android:id="@+id/TV_PokemonCategory"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="CATEGORY">
-    </TextView>
-    <TextView
-        android:id="@+id/TV_PokemonURL"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="URL">
-    </TextView>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"/>
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/fl_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/yellow"
+        app:layout_constraintBottom_toTopOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:id="@+id/TV_AppTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pokemon Details"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold"/>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/fl_header"
+        tools:context=".presentation.view.MainActivity">
+
+        <TextView
+            android:id="@+id/TV_PokemonName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="NAME"></TextView>
+
+        <TextView
+            android:id="@+id/TV_PokemonCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="CATEGORY"></TextView>
+
+        <TextView
+            android:id="@+id/TV_PokemonURL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="URL"></TextView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

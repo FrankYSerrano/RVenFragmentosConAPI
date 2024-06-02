@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PokemonRepositoryImplementation(private var pokemonService: PokemonService): PokemonRepository {
-//    override suspend fun fetchPokemons(): MutableList<PokemonResponse> {
     override suspend fun fetchPokemons(): MutableList<Pokemon> {
         return withContext(Dispatchers.IO){
             val listPokemons = pokemonService.getAllPokemons()

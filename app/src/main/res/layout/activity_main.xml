@@ -7,77 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.MainActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"/>
-
-    <FrameLayout
-        android:id="@+id/fl_header"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/FCV_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <TextView
-            android:id="@+id/TV_AppTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Pokemon List"
-            android:textColor="@color/black"
-            android:textSize="34sp"
-            android:textStyle="bold"/>
-
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95"/>
-
-    <FrameLayout
-        android:id="@+id/frame_layout2"
-        android:layout_width="409dp"
-        android:layout_height="583dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline1">
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            tools:context=".presentation.view.MainActivity">
-
-            <FrameLayout
-                android:id="@+id/FL_List"
-                android:layout_width="0dp"
-                android:layout_weight="0.65"
-                android:layout_height="match_parent"
-                tools:layout = "@layout/fragment_pokemon_list">
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/FL_Detail"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_pokemon_details">
-            </FrameLayout>
-
-        </LinearLayout>
-
-    </FrameLayout>
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

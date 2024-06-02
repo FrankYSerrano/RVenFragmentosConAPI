@@ -1,50 +1,37 @@
 package com.example.practicando.presentation.view
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicando.data.response.Pokemon
-import com.example.practicando.data.response.PokemonResponse
 import com.example.practicando.databinding.ItemPokemonBinding
 
-class PokemonListAdapter: RecyclerView.Adapter<PokemonListAdapter.ViewHolder>() {
+class PokemonListAdapter: RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>(){
 
-    var pokemonsList = listOf<Pokemon>()
-    @SuppressLint("NotifyDataSetChanged")
-    set (value) {
+    lateinit var onItemClickListener: (Pokemon) -> Unit
+
+    var pokemons = mutableListOf<Pokemon>()
+    set(value) {
         field = value
         notifyDataSetChanged()
     }
-    /**
-     * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
-     * an item.
-     *
-     *
-     * This new ViewHolder should be constructed with a new View that can represent the items
-     * of the given type. You can either create a new View manually or inflate it from an XML
-     * layout file.
-     *
-     *
-     * The new ViewHolder will be used to display items of the adapter using
-     * [.onBindViewHolder]. Since it will be re-used to display
-     * different items in the data set, it is a good idea to cache references to sub views of
-     * the View to avoid unnecessary [View.findViewById] calls.
-     *
-     * @param parent The ViewGroup into which the new View will be added after it is bound to
-     * an adapter position.
-     * @param viewType The view type of the new View.
-     *
-     * @return A new ViewHolder that holds a View of the given view type.
-     * @see .getItemViewType
-     * @see .onBindViewHolder
-     */
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
-    ): PokemonListAdapter.ViewHolder {
-        val binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        viewType: Int): PokemonViewHolder {
+
+        val bindingItem =
+            ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PokemonViewHolder(bindingItem)
+    }
+
+    /**
+     * Returns the total number of items in the data set held by the adapter.
+     *
+     * @return The total number of items in this adapter.
+     */
+    override fun getItemCount(): Int {
+        return pokemons.size
     }
 
     /**
@@ -68,25 +55,20 @@ class PokemonListAdapter: RecyclerView.Adapter<PokemonListAdapter.ViewHolder>() 
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val pokemon = pokemonsList[position]
-        holder.bindPokemon(pokemon)
+    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
+        val pokemon = pokemons[position]
+        holder.bind(pokemon)
     }
 
-    /**
-     * Returns the total number of items in the data set held by the adapter.
-     *
-     * @return The total number of items in this adapter.
-     */
-    override fun getItemCount(): Int {
-        return pokemonsList.size
+    inner class PokemonViewHolder(var bindingItem: ItemPokemonBinding)
+        : RecyclerView.ViewHolder(bindingItem.root) {
+            fun bind(pokemon: Pokemon){
+                with(pokemon){
+                    bindingItem.TVPokemonName.text = name
+//                    bindingItem.IVPokemonMini.setImageResource()
+                }
+            }
     }
 
-    inner class ViewHolder(private var binding: ItemPokemonBinding)
-        : RecyclerView.ViewHolder(binding.root){
-
-        fun bindPokemon(pokemon: Pokemon){
-            binding.TVPokemonName.text = pokemon.name
-        }
-    }
 }
+
